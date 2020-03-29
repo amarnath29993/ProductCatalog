@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>Category Master</h2>
+
+
+	<form th:action="@{/update}" th:object="${cat}" method="post">
+		<pre>
+	ProductId      :   <input type="text" th:field="*{categoryId}"
+				readonly="readonly">
+		
+    Category       :   <input type="text" th:field="*{cat}">
+	
+	Description    :   <input type="text" th:field="*{categoryDesc}">
+	
+	
+	    <button>Update</button>
+	
+	</pre>
+	</form>
+
+	<table border="2">
+		<thead>
+			<tr>
+				<th>Product Id</th>
+				<th>Category</th>
+				<th>Category Description</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:if="${cats.empty}">
+				<td colspan="4"><span style="color: red">No category
+						available</span></td>
+			</tr>
+			<tr th:each="cat : ${cats}">
+				<td th:text="${cat.categoryId}"></td>
+				<td th:text="${cat.cat}"></td>
+				<td th:text="${cat.categoryDesc}"></td>
+				<td><a th:href="@{/update/{id}(id=${cat.categoryId})}">Update</a>
+					/ <a th:href="@{/delete/{id}(id=${cat.categoryId})}">Delete</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+
+</body>
+</html>
