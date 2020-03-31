@@ -15,7 +15,6 @@ public class SubCategoryDao {
 	SubCategoryRepo subCatRepo;
 
 	public SubCategory saveSubcat(SubCategory subcat) {
-		// TODO Auto-generated method stub
 		
 		return subCatRepo.save(subcat);
 	}
@@ -26,20 +25,22 @@ public class SubCategoryDao {
 	}
 
 	public SubCategory getCatById(Integer id) {
-		// TODO Auto-generated method stub
 		return subCatRepo.findById(id).get();
 	}
 
 	public void updateSubCat(SubCategory subCategory) {
-		// TODO Auto-generated method stub
 		
 		subCatRepo.save(subCategory);
 	}
 
 	public void deleteSubCat(Integer id) {
-		// TODO Auto-generated method stub
 		subCatRepo.deleteById(id);
 		
+	}
+
+	public List<SubCategory> findSubCatByCat(String cat) {
+		
+		return subCatRepo.findByCat(cat);
 	}
 	
 }

@@ -25,17 +25,14 @@ public class CategoryDao {
 	}
 
 	public void deleteCat(Integer id) {
-		// TODO Auto-generated method stub
 		repository.deleteById(id);
 	}
 
 	public Category getCatById(Integer id) {
-		// TODO Auto-generated method stub
 		return repository.findById(id).get();
 	}
 
 	public void catUpdate(Category category) {
-		// TODO Auto-generated method stub
 		repository.save(category);
 	}
 }

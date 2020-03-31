@@ -3,74 +3,128 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Product</title>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+	$(document)
+			.ready(
+					function() {
+						$("#cat")
+								.change(
+										function() {
+											// alert("hiii");
+
+											var cat = $(this).val();
+
+											//   alert(cat);
+
+											$
+													.ajax({
+														type : 'GET',
+														url : '/subcats/' + cat,
+														success : function(
+																result) {
+															//alert("successed..");
+															//alert(result[0].productSubCat)
+
+															var s = '';
+															for (var i = 0; i < result.length; i++) {
+																s += '<option value="' + result[i].subCategory + '">'
+																		+ result[i].subCategory
+																		+ '</option>';
+															}
+
+															//alert(s);
+															$('#subCating')
+																	.html(s);
+
+														}
+													});
+
+										});
+					});
+</script>
+
+
 </head>
 <body>
 
-<h2>List Of Products</h2>
+	<h2>List Of Products</h2>
 
 	<form th:action="@{/saveProduct}" th:object="${product}" method="post">
+
+		<pre>
+	Product Name     :  <input type="text" th:field="*{productName}">                   Company Name           :  <input
+				type="text" th:field="*{companyName}">
 	
-	<pre>
-	Product Name     :  <input type="text" th:field="*{productName}">                   Company Name           :  <input type="text" th:field="*{companyName}">
-	
-	Product Category :   <select th:field="*{cat}">
+	Product Category :   <select th:field="*{cat}" id="cat">
                          <option value=""> --SELECT--- </option>
                          <option th:each="cat : ${categories}"
-                            th:value="${cat.cat}"
-                            th:text="${cat.cat}"/>
-                  </select>                            Product Sub Category   :       <select th:field="*{subCategory}">
-                                                                      <option value=""> --SELECT--- </option>
-                                                                                   <option th:each="subCat : ${subCategories}"
+					th:value="${cat.cat}" th:text="${cat.cat}" />
+                  </select>                            Product Sub Category   :       <select
+				th:field="*{subCategory}" id="subCating">
+                                                                      <option
+					value=""> --SELECT--- </option>
+                                                                                   <!-- <option th:each="subCat : ${subCategories}"
                                                                          th:value="${subCat.subCategory}"
-                                                                        th:text="${subCat.subCategory}"/>
+                                                                        th:text="${subCat.subCategory}"/> -->
                                                                        </select>
 	
-	Product Image    :  <input type="file" th:field="*{productImage}">        Specification          :  <input type="text" th:field="*{specification}">
+	Product Image    :  <input type="file" th:field="*{productImage}">        Specification          :  <input
+				type="text" th:field="*{specification}">
 	
-	SKU Code         :  <input type="text" th:field="*{skuCode}">                   Weight                 :  <input type="text" th:field="*{weight}">
+	SKU Code         :  <input type="text" th:field="*{skuCode}">                   Weight                 :  <input
+				type="text" th:field="*{weight}">
 	
-	Price            :  <input type="text" th:field="*{price}">                   Product Type           :  <input type="text" th:field="*{productType}">
+	Price            :  <input type="text" th:field="*{price}">                   Product Type           :  <input
+				type="text" th:field="*{productType}">
 	
-	Recipe           :  <input type="text" th:field="*{recipe}">                   Nutrition Information  :  <input type="text" th:field="*{nutritionInformation}">
+	Recipe           :  <input type="text" th:field="*{recipe}">                   Nutrition Information  :  <input
+				type="text" th:field="*{nutritionInformation}">
 	
-	                            <button>Save</button>                    <button><a style="text-decoration: none;" href="/formProduct">Reset</a></button>
+	                            <button>Save</button>                    <button>
+				<a style="text-decoration: none;" href="/formProduct">Reset</a>
+			</button>
 	</pre>
-	
+
 	</form>
-	
+
 	<table border="1">
-	
-	<thead>
-	<tr>
-	<th>Sr.No</th>
-	<th>P Name</th>
-	<th>P Category</th>
-	<th>SKU Code</th>
-	<th>Weight</th>
-	<th>Price</th>
-	<th>Action</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	<tr th:if="${products.empty}">
-				<td colspan="4"><span style="color:red">No products available</span></td>
+
+		<thead>
+			<tr>
+				<th>Sr.No</th>
+				<th>P Name</th>
+				<th>P Category</th>
+				<th>SKU Code</th>
+				<th>Weight</th>
+				<th>Price</th>
+				<th>Action</th>
 			</tr>
-			
+		</thead>
+
+		<tbody>
+			<tr th:if="${products.empty}">
+				<td colspan="4"><span style="color: red">No products
+						available</span></td>
+			</tr>
+
 			<tr th:each="product,prodStatus : ${products}">
-			<td th:text="${prodStatus.index+1}"></td>
-			<td th:text="${product.productName}"></td>
-			<td th:text="${product.cat}"></td>
-			<td th:text="${product.skuCode}"></td>
-			<td th:text="${product.weight}"></td>
-			<td th:text="${product.price}"></td>
-			<td>
-			<a th:href="@{/updateProduct/{id}(id=${product.productId})}">Update</a>/
-			<a th:href="@{/deleteProduct/{id}(id=${product.productId})}">Delete</a></td>
+				<td th:text="${prodStatus.index+1}"></td>
+				<td th:text="${product.productName}"></td>
+				<td th:text="${product.cat}"></td>
+				<td th:text="${product.skuCode}"></td>
+				<td th:text="${product.weight}"></td>
+				<td th:text="${product.price}"></td>
+				<td><a
+					th:href="@{/updateProduct/{id}(id=${product.productId})}">Update</a>/
+					<a th:href="@{/deleteProduct/{id}(id=${product.productId})}">Delete</a></td>
 			</tr>
-	
-	</tbody>
-	
+
+		</tbody>
+
 	</table>
 </body>
 </html>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.productcatalog.model.Category;
 import com.productcatalog.model.Product;
@@ -144,5 +145,17 @@ public class ProductController {
 
 		return "product";
 	}
+	
+	@RequestMapping("/subcats/{id}")
+	@ResponseBody
+	public List<SubCategory> getSubCatByCat(@PathVariable("id") String cat){
 
+		System.out.println("enter value is "+cat);
+
+		List<SubCategory> subCats=SubcategoryService.getSubCatCat(cat);
+
+		System.out.println(subCats);
+
+		return subCats;
+	}
 }

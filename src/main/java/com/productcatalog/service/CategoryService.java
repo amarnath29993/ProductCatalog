@@ -25,18 +25,15 @@ public class CategoryService {
 	}
 
 	public void deleteCategory(Integer id) {
-		// TODO Auto-generated method stub
 		
 		dao.deleteCat(id);
 	}
 
 	public Category getCatById(Integer id) {
-		// TODO Auto-generated method stub
 		return dao.getCatById(id);
 	}
 
 	public void catUpdate(Category category) {
-		// TODO Auto-generated method stub
 		dao.catUpdate(category);
 	}
 
