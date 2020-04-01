@@ -2,24 +2,29 @@ package com.productcatalog.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import com.productcatalog.model.Category;
 import com.productcatalog.service.CategoryService;
 
 @Controller
 public class CategoryController {
+	public static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
 	@Autowired
 	private CategoryService service;
 
-	@RequestMapping("/category")
+	@GetMapping("/category")
 	public String showCategory(ModelMap map) {
 
 		System.out.println("ProductController.showcategory()");
@@ -29,7 +34,7 @@ public class CategoryController {
 		return "category";
 	}
 
-	@RequestMapping(value = "/category", method = RequestMethod.POST)
+	@PostMapping(value = "/category")
 	public String RegisterCategory(@ModelAttribute("category") Category category, ModelMap map) {
 
 		System.out.println(category);
@@ -41,7 +46,7 @@ public class CategoryController {
 		return "category";
 	}
 
-	@RequestMapping(value = "/categorylist", method = RequestMethod.GET)
+	@GetMapping(value = "/categorylist")
 	public String categorylist(ModelMap map) {
 		List<Category> cats = service.getAllcats();
 
@@ -52,7 +57,7 @@ public class CategoryController {
 		return "category";
 	}
 
-	@RequestMapping(value = "/delete/{id}")
+	@DeleteMapping(value = "/delete/{id}")
 	public String categoryDelete(@PathVariable("id") Integer id, ModelMap map) {
 
 		System.out.println(id + " is deleted...");
@@ -66,7 +71,7 @@ public class CategoryController {
 		return "category";
 	}
 
-	@RequestMapping(value = "/update/{id}")
+	@PutMapping(value = "/update/{id}")
 	public String categoryUpdate(@PathVariable("id") Integer id, ModelMap map) {
 
 		Category proCat = service.getCatById(id);
@@ -79,7 +84,7 @@ public class CategoryController {
 		return "categoryUpdate";
 	}
 
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@PostMapping(value = "/update")
 	public String categoryUpdating(@ModelAttribute("category") Category category, ModelMap map) {
 
 		service.catUpdate(category);

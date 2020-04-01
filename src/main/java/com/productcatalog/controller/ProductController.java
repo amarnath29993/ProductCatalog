@@ -2,13 +2,17 @@ package com.productcatalog.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.productcatalog.model.Category;
@@ -20,6 +24,7 @@ import com.productcatalog.service.SubCategoryService;
 
 @Controller
 public class ProductController {
+	 public static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
 	@Autowired
 	ProductService productService;
@@ -30,7 +35,7 @@ public class ProductController {
 	@Autowired
 	SubCategoryService SubcategoryService;
 
-	@RequestMapping("/formProduct")
+	@GetMapping("/formProduct")
 	public String formProduct(ModelMap map) {
 
 		System.out.println("ProductController.formProduct()");
@@ -48,7 +53,7 @@ public class ProductController {
 		return "product";
 	}
 
-	@RequestMapping("/saveProduct")
+	@GetMapping("/saveProduct")
 	public String registerProduct(@ModelAttribute("product") Product product, ModelMap map) {
 
 		System.out.println(product);
@@ -70,7 +75,7 @@ public class ProductController {
 		return "product";
 	}
 
-	@RequestMapping("/getProducts")
+	@GetMapping("/getProducts")
 	public String getAllProducts(ModelMap map) {
 
 		List<Product> products = productService.getAllProducts();
@@ -87,7 +92,7 @@ public class ProductController {
 		return "product";
 	}
 
-	@RequestMapping("/updateProduct/{id}")
+	@PutMapping("/updateProduct/{id}")
 	public String getproductById(@PathVariable("id") Integer id, ModelMap map) {
 
 		System.out.println("from update " + id);
@@ -108,7 +113,7 @@ public class ProductController {
 		return "updateProduct";
 	}
 
-	@RequestMapping(value = "/updateProduct", method = RequestMethod.POST)
+	@PostMapping(value = "/updateProduct")
 	public String updateProduct(@ModelAttribute("product") Product proMaster, ModelMap map) {
 
 		productService.updateProduct(proMaster);
@@ -127,7 +132,7 @@ public class ProductController {
 
 	}
 
-	@RequestMapping("/deleteProduct/{id}")
+	@DeleteMapping("/deleteProduct/{id}")
 	public String deleteProduct(@PathVariable("id") Integer id,ModelMap map) {
 
 		productService.deleteProduct(id);
@@ -146,7 +151,7 @@ public class ProductController {
 		return "product";
 	}
 	
-	@RequestMapping("/subcats/{id}")
+	@GetMapping("/subcats/{id}")
 	@ResponseBody
 	public List<SubCategory> getSubCatByCat(@PathVariable("id") String cat){
 
