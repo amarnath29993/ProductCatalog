@@ -7,12 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.productcatalog.model.Category;
 import com.productcatalog.service.CategoryService;
@@ -34,7 +33,7 @@ public class CategoryController {
 		return "category";
 	}
 
-	@PostMapping(value = "/category")
+	@RequestMapping(value = "/category", method = RequestMethod.POST)
 	public String RegisterCategory(@ModelAttribute("category") Category category, ModelMap map) {
 
 		System.out.println(category);
@@ -46,7 +45,7 @@ public class CategoryController {
 		return "category";
 	}
 
-	@GetMapping(value = "/categorylist")
+	@RequestMapping(value = "/categorylist", method = RequestMethod.GET)
 	public String categorylist(ModelMap map) {
 		List<Category> cats = service.getAllcats();
 
@@ -57,7 +56,7 @@ public class CategoryController {
 		return "category";
 	}
 
-	@DeleteMapping(value = "/delete/{id}")
+	@RequestMapping(value = "/delete/{id}")
 	public String categoryDelete(@PathVariable("id") Integer id, ModelMap map) {
 
 		System.out.println(id + " is deleted...");
@@ -71,7 +70,7 @@ public class CategoryController {
 		return "category";
 	}
 
-	@PutMapping(value = "/update/{id}")
+	@RequestMapping(value = "/update/{id}")
 	public String categoryUpdate(@PathVariable("id") Integer id, ModelMap map) {
 
 		Category proCat = service.getCatById(id);
@@ -84,7 +83,7 @@ public class CategoryController {
 		return "categoryUpdate";
 	}
 
-	@PostMapping(value = "/update")
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String categoryUpdating(@ModelAttribute("category") Category category, ModelMap map) {
 
 		service.catUpdate(category);

@@ -7,12 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.productcatalog.model.Category;
 import com.productcatalog.model.SubCategory;
@@ -29,7 +27,7 @@ public class SubCategoryController {
 	@Autowired
 	CategoryService serviceProduct;
 
-	@GetMapping("/subcategory")
+	@RequestMapping("/subcategory")
 	public String showSubCategory(ModelMap map) {
 
 		System.out.println("ProductController.showSubCategory()");
@@ -41,7 +39,7 @@ public class SubCategoryController {
 		return "subCategory";
 	}
 
-	@PostMapping(value = "/subcategory")
+	@RequestMapping(value = "/subcategory", method = RequestMethod.POST)
 	public String registerSubCategory(@ModelAttribute("subcategory") SubCategory subcat, ModelMap map) {
 
 		System.out.println("subCat values " + subcat);
@@ -55,7 +53,7 @@ public class SubCategoryController {
 		return "subCategory";
 	}
 
-	@GetMapping("/subcats")
+	@RequestMapping("/subcats")
 	public String getCats(ModelMap map) {
 
 		List<SubCategory> subCats = serviceSubCat.getSubCats();
@@ -67,7 +65,7 @@ public class SubCategoryController {
 		return "subCategory";
 	}
 
-	@DeleteMapping(value = "/deleteSubCat/{id}")
+	@RequestMapping(value = "/deleteSubCat/{id}")
 	public String categoryDelete(@PathVariable("id") Integer id, ModelMap map) {
 
 		System.out.println(id + " is deleted...");
@@ -83,7 +81,7 @@ public class SubCategoryController {
 		return "subCategory";
 	}
 
-	@PutMapping(value = "/updateSubCat/{id}")
+	@RequestMapping(value = "/updateSubCat/{id}")
 	public String categoryUpdate(@PathVariable("id") Integer id, ModelMap map) {
 
 		System.out.println("form update " + id);
@@ -96,7 +94,7 @@ public class SubCategoryController {
 		return "subCategoryUpdate";
 	}
 
-	@PostMapping(value = "/updateSubCat")
+	@RequestMapping(value = "/updateSubCat", method = RequestMethod.POST)
 	public String categoryUpdating(@ModelAttribute("subCategory") SubCategory subCategory, ModelMap map) {
 
 		System.out.println(subCategory);
