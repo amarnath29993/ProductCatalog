@@ -40,4 +40,10 @@ public class ProductService {
 		
 	}
 
+	public List<Product> getproductBySubCat(String subCat) {
+		return productdao.getProductBySubCat(subCat);
+		
+		
+	}
+
 }

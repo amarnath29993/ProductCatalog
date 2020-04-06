@@ -135,8 +135,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<h4>subcategories</h4>
 								<div th:each="subcat:${subCategories}">
 								<ul>
-								<!-- Comparing categories and sub categories -->
-									<li th:if='${cat.cat}==${subcat.cat}'><a href="products.html" th:text='${subcat.subCategory}'></a></li>
+									<li th:if='${cat.cat}==${subcat.cat}'><a th:href="@{/{id}(id=${subcat.subCategory})}" th:text='${subcat.subCategory}'></a></li>
 									
 								</ul>	
 							</div>	
