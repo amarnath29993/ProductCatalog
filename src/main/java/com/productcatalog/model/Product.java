@@ -1,7 +1,5 @@
 package com.productcatalog.model;
 
-import java.io.File;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +16,7 @@ public class Product {
 
 	private String cat;
 
-	private File productImage;
+	private String strImage;
 
 	private String skuCode;
 
@@ -62,12 +60,12 @@ public class Product {
 		this.cat = cat;
 	}
 
-	public File getProductImage() {
-		return productImage;
+	public String getStrImage() {
+		return strImage;
 	}
 
-	public void setProductImage(File productImage) {
-		this.productImage = productImage;
+	public void setStrImage(String strImage) {
+		this.strImage = strImage;
 	}
 
 	public String getSkuCode() {
@@ -144,8 +142,8 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [productId=" + productId + ", productName=" + productName + ", cat=" + cat + ", productImage="
-				+ productImage + ", skuCode=" + skuCode + ", price=" + price + ", recipe=" + recipe + ", companyName="
+		return "Product [productId=" + productId + ", productName=" + productName + ", cat=" + cat + ", strImage="
+				+ strImage + ", skuCode=" + skuCode + ", price=" + price + ", recipe=" + recipe + ", companyName="
 				+ companyName + ", subCategory=" + subCategory + ", specification=" + specification + ", weight="
 				+ weight + ", productType=" + productType + ", nutritionInformation=" + nutritionInformation + "]";
 	}

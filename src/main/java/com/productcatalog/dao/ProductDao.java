@@ -41,6 +41,8 @@ public class ProductDao {
 	}
 
 	public List<Product> getProductBySubCat(String subCat) {
+		System.out.println(subCat);
+		
 		return productrepo.findBySubCategory(subCat);
 	}
 

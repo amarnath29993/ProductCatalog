@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -144,7 +143,7 @@ public class ProductController {
 
 	}
 
-	@DeleteMapping("/deleteProduct/{id}")
+	@RequestMapping("/deleteProduct/{id}")
 	public String deleteProduct(@PathVariable("id") Integer id, ModelMap map) {
 
 		productService.deleteProduct(id);

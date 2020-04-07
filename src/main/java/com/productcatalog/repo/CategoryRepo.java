@@ -6,6 +6,4 @@ import com.productcatalog.model.Category;
 
 public interface CategoryRepo extends JpaRepository<Category, Integer> {
 	
-	
-
 }
