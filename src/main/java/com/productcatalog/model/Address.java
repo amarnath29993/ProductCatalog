@@ -1,9 +1,12 @@
 package com.productcatalog.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Address {
@@ -14,25 +17,14 @@ public class Address {
 	private Integer cityId;
 	private Integer vendorId;
 	private String pincode;
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="addressId",referencedColumnName="addressId")
 	private Integer customerId;
 	private String landmark;
 	private String name;
 	private String contact;
 	public Address() {
 		super();
-	}
-	public Address(Integer addressId, String address, Integer cityId, Integer vendorId, String pincode,
-			Integer customerId, String landmark, String name, String contact) {
-		super();
-		this.addressId = addressId;
-		this.address = address;
-		this.cityId = cityId;
-		this.vendorId = vendorId;
-		this.pincode = pincode;
-		this.customerId = customerId;
-		this.landmark = landmark;
-		this.name = name;
-		this.contact = contact;
 	}
 	public Integer getAddressId() {
 		return addressId;
@@ -64,12 +56,7 @@ public class Address {
 	public void setPincode(String pincode) {
 		this.pincode = pincode;
 	}
-	public Integer getCustomerId() {
-		return customerId;
-	}
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
-	}
+	
 	public String getLandmark() {
 		return landmark;
 	}
@@ -88,6 +75,12 @@ public class Address {
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
+	public Integer getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
 	@Override
 	public String toString() {
 		return "Address [addressId=" + addressId + ", address=" + address + ", cityId=" + cityId + ", vendorId="
@@ -95,5 +88,5 @@ public class Address {
 				+ ", name=" + name + ", contact=" + contact + "]";
 	}
 	
-
+	
 }

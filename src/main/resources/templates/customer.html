@@ -2,9 +2,53 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Customer Signup</title>
 </head>
 <body>
 	<h1>Welcome to customer module</h1>
+	<h2>Customer Details</h2>
+	<form th:action="@{/customer}" th:object="${customer}" method="post">
+	<pre>
+	Name:          <input type="text" th:field="*{name}">
+	EmailId:       <input type="text" th:field="*{emailId}">
+	Password:      <input type="password" th:field=*{password}>
+	Phone:         <input type="text" th:field=*{phone}>
+	Status:        <input type="text" th:field=*{status}>
+	Date Of Enquiry:<input type="date" th:field=*{dateOfEnquiry}>
+	
+			<button>Save</button>
+	</pre>
+	
+	</form>
+	
+	<table border="2">
+		<thead>
+			<tr>
+				<th>Sr.No</th>
+				<th>Name</th>
+				<th>EmailId</th>
+				<th>Password</th>
+				<th>Phone</th>
+				<th>Status</th>
+				<th>Date Of Enquiry</th>
+				<th>Action</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:if="${customer.empty}">
+				<td colspan="4"><span style="color:red">No Customer Available</span></td>
+				</tr>
+				<tr th:each="customer,customerStatus:${customer}">
+				     <td th:text="${customerStatus.index+1}"></td>
+				     <td th:text="${customer.customer}"></td>
+				     <td> <a th:href="@{/update/{id}(id=${customer.customerId})}">Update</a> 
+				/ <a th:href="@{/delete/{id}(id=${customer.customerId})}">Delete</a></td>
+			</tr>
+				</tbody> 
+	
+	
+	
+	
+	</table>
 </body>
 </html>
