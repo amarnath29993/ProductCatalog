@@ -9,4 +9,5 @@ import java.lang.String;
 
 public interface ProductRepo extends JpaRepository<Product, Integer> {
 	List<Product> findBySubCategory(String subcategory);
+	Product findByProductName(String productname);
 }

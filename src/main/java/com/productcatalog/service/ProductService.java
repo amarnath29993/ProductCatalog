@@ -45,5 +45,8 @@ public class ProductService {
 		
 		
 	}
+	public Product getProductByName(String pro) {
+		return productdao.getProductByName(pro);
+	}
 
 }

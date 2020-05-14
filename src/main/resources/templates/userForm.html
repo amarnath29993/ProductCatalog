@@ -84,21 +84,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<ul>
 						<li>
 							<i class="user"></i>
-							<a href="/login1">My Account</a>
+							<a th:href="@{/userdetails/{id}(id=${user.userName})}"><span th:text="${user.userName}"></span></a>
 						</li>
 						<li class="login">
 							<i class="lock"></i>
-							<a href="/login1">Login</a>|
+							<a href="/logout">logout</a>|
 						</li>
 						<li>
 							<i class="cart"></i>
 							<a href="#">Shopping Cart</a>
 						</li>
-						<li class="last">0</li>
+						<li class="last"><span th:text="${cartCount}"/></li>
 					</ul>
-					<div class="sign-up-right">
-						<a href="login.html">Sign Up</a>
-					</div>
+					
 				</div>
 				<div class="clearfix"></div>
 			</div>

@@ -1,54 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Customer Signup</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<h1>Welcome to customer module</h1>
-	<h2>Customer Details</h2>
-	<form th:action="@{/customer}" th:object="${customer}" method="post">
-	<pre>
-	Name:          <input type="text" th:field="*{name}">
-	EmailId:       <input type="text" th:field="*{emailId}">
-	Password:      <input type="password" th:field=*{password}>
-	Phone:         <input type="text" th:field=*{phone}>
-	Status:        <input type="text" th:field=*{status}>
-	Date Of Enquiry:<input type="date" th:field=*{dateOfEnquiry}>
+<h2>Customer Form Page</h2>
+<form th:action="@{/cust}" th:object="${customer}" method="post">
+		<pre>
+	Customer Name:   <input type="text" th:field="*{customerName}">
 	
-			<button>Save</button>
+	Mobile  Number : <input type="text" th:field="*{mobileNumber}">
+	
+	Email Id : <input type="text" th:field="*{emailId}">
+	
+	Password : <input type="text" th:field="*{password}">
+	
+	Security Question: <select th:field="*{secQuestion}">
+	<option value="" >Select A Question</option>
+    <option th:value="What is your mother's maiden name?" >What is your mother's maiden name?</option>
+    <option th:value="What is the name of your first pet?" >Name your First Toy?</option>
+    <option th:value="What elementary school did you attend?" >What elementary school did you attend?</option>
+    <option th:value="Who is your favourite Cricketer">Who is your favourite cricketer?</option>
+</select>
+	
+	Answer         :  <input type="text" th:field="*{secAns}">
+	
+	     
+	
+	      <button>Submit</button>
+	
 	</pre>
-	
 	</form>
-	
-	<table border="2">
-		<thead>
-			<tr>
-				<th>Sr.No</th>
-				<th>Name</th>
-				<th>EmailId</th>
-				<th>Password</th>
-				<th>Phone</th>
-				<th>Status</th>
-				<th>Date Of Enquiry</th>
-				<th>Action</th>
-				</tr>
-				</thead>
-				<tbody>
-				<tr th:if="${customer.empty}">
-				<td colspan="4"><span style="color:red">No Customer Available</span></td>
-				</tr>
-				<tr th:each="customer,customerStatus:${customer}">
-				     <td th:text="${customerStatus.index+1}"></td>
-				     <td th:text="${customer.customer}"></td>
-				     <td> <a th:href="@{/update/{id}(id=${customer.customerId})}">Update</a> 
-				/ <a th:href="@{/delete/{id}(id=${customer.customerId})}">Delete</a></td>
-			</tr>
-				</tbody> 
-	
-	
-	
-	
-	</table>
+
 </body>
 </html>

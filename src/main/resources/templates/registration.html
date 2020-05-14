@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Registration</title>
+</head>
+<body>
+<h2>Customer Form Page</h2>
+<form th:action="@{/cust}" th:object="${user}" method="post">
+		<pre>
+	Customer Name      : <input type="text" th:field="*{userName}">
+	
+	Mobile Number      : <input type="text" th:field="*{mobileNumber}">
+	
+	Email Id           : <input type="text" th:field="*{emailId}">
+	
+	Password           : <input type="text" th:field="*{password}">
+	
+	Security Question  : <select th:field="*{secQuestion}">
+	<option value="" >Select Question</option>
+    <option th:value="YourNickName" >What is your nickname?</option>
+    <option th:value="NameYourFavouriteActor" >Name your Favourite Actor?</option>
+    <option th:value="NameYourBestFriend" >Name your Best Friend?</option>
+    <option th:value="FavouriteCricketer">Who is your Favourite Cricketer?</option>
+</select>
+	
+	Answer             :  <input type="text" th:field="*{secAns}">
+	
+	
+	        <button>Submit</button>
+	
+	</pre>
+	</form>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>City</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function(){
+  $("#country").change(function(){
+  //  alert("hiii country");
+    var countryId = $(this).val();
+    //alert(countryId);
+    $.ajax({
+		type: 'GET',
+		url: '/getStates/' + countryId,
+		success: function(result) {
+			//alert("successed..");
+			//alert(result[0].productSubCat)
+			
+			var s = '<option value=""> --SELECT--- </option>';
+			for(var i = 0; i < result.length; i++) {
+				s += '<option value="' + result[i].stateId + '">' + result[i].name + '</option>';
+			}
+			
+			//alert(s);
+			$('#state').html(s);
+			
+		}
+    });
+    
+  });
+});
+</script>
+</head>
+<body style="background-color: red;">
+<h2>Please Select Country and State and enter your city Name</h2>
+<form th:action="@{/city}" th:object="${city}" method="post">
+		<pre>
+	
+	
+	Country : <select th:field="*{state.country.countryId}" id="country" >
+                         <option value=""> --SELECT--- </option>
+                         <option th:each="country : ${countries}"
+                            th:value="${country.countryId}"
+                            th:text="${country.name}"/>
+                  </select>	
+                  
+         State  : <select th:field="*{state.stateId}" id="state">
+                         <option value=""> --SELECT--- </option>
+                            
+                    </select>
+                    
+                    	 
+	 City   :  <input type="text" th:field="*{name}" >
+	
+	    <button>Save</button>
+	
+	</pre>
+	</form>
+</body>
+</html>
+

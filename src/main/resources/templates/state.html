@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>State</title>
+</head>
+<body style="background-color: red;">
+<h1>State Information</h1>
+
+<form th:action="@{/state}" th:object="${state}" method="post">
+		<pre>
+		
+	Country  : <select th:field="*{country.countryId}">
+                         <option value=""> --SELECT--- </option>
+                         <option th:each="cont : ${countries}"
+                            th:value="${cont.countryId}"
+                            th:text="${cont.name}"/>
+                  </select>	
+                  
+	 State   : <input type="text" th:field="*{name}">
+	
+	    <button>Save</button>
+	
+	</pre>
+	</form>
+
+</body>
+</html>

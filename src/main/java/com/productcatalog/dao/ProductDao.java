@@ -45,5 +45,8 @@ public class ProductDao {
 		
 		return productrepo.findBySubCategory(subCat);
 	}
+	public Product getProductByName(String pro) {
+		return productrepo.findByProductName(pro);
+	}
 
 }

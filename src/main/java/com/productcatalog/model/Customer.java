@@ -1,48 +1,48 @@
 package com.productcatalog.model;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Customer {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer customerId;
-	private String name;
+    private String mobileNumber;
+	
+	private String customerName;
+	
 	private String emailId;
+	
 	private String password;
-	private String phone;
-	private String status;
-	private Date dateOfEnquiry;
-	/*@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="customerId",referencedColumnName="customerId")
-	private Set<Address> addressId = new HashSet<Address>();*/
-	private Integer addressId;
-	private String securityQuestions;
-	private String answer;
+	
+	private String secQuestion;
+	
+	private String secAns;
+	
+	private boolean status=true;
+	
+	/*@OneToOne(targetEntity=Address.class,cascade=CascadeType.ALL)
+	private Address address;
+	*/
+	
 
 	public Customer() {
 		super();
 	}
 
-	public Integer getCustomerId() {
-		return customerId;
+	public String getMobileNumber() {
+		return mobileNumber;
 	}
 
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
 	}
 
-	public String getName() {
-		return name;
+	public String getCustomerName() {
+		return customerName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 
 	public String getEmailId() {
@@ -61,61 +61,35 @@ public class Customer {
 		this.password = password;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getSecQuestion() {
+		return secQuestion;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setSecQuestion(String secQuestion) {
+		this.secQuestion = secQuestion;
 	}
 
-	public String getStatus() {
+	public String getSecAns() {
+		return secAns;
+	}
+
+	public void setSecAns(String secAns) {
+		this.secAns = secAns;
+	}
+
+	public boolean isStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(boolean status) {
 		this.status = status;
-	}
-
-	public Date getDateOfEnquiry() {
-		return dateOfEnquiry;
-	}
-
-	public void setDateOfEnquiry(Date dateOfEnquiry) {
-		this.dateOfEnquiry = dateOfEnquiry;
-	}
-
-	
-	public String getSecurityQuestions() {
-		return securityQuestions;
-	}
-
-	public void setSecurityQuestions(String securityQuestions) {
-		this.securityQuestions = securityQuestions;
-	}
-
-	public String getAnswer() {
-		return answer;
-	}
-
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
-	
-
-	public Integer getAddressId() {
-		return addressId;
-	}
-
-	public void setAddressId(Integer addressId) {
-		this.addressId = addressId;
 	}
 
 	@Override
 	public String toString() {
-		return "Customer [customerId=" + customerId + ", name=" + name + ", emailId=" + emailId + ", password="
-				+ password + ", phone=" + phone + ", status=" + status + ", dateOfEnquiry=" + dateOfEnquiry
-				+ ", addressId=" + addressId + ", securityQuestions=" + securityQuestions + ", answer=" + answer + "]";
+		return "Customer [mobileNumber=" + mobileNumber + ", customerName=" + customerName + ", emailId=" + emailId
+				+ ", password=" + password + ", secQuestion=" + secQuestion + ", secAns=" + secAns + ", status="
+				+ status + "]";
 	}
 
 	

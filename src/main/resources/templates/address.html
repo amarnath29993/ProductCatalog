@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Address</title>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+	$(document)
+			.ready(
+					function() {
+						$("#country")
+								.change(
+										function() {
+
+											var countryId = $(this).val();
+
+											$
+													.ajax({
+														type : 'GET',
+														url : '/getStates/'
+																+ countryId,
+														success : function(
+																result) {
+
+															var s = '<option value=""> --SELECT--- </option>';
+															for (var i = 0; i < result.length; i++) {
+																s += '<option value="' + result[i].stateId + '">'
+																		+ result[i].name
+																		+ '</option>';
+															}
+
+															$('#state').html(s);
+
+														}
+													});
+
+										});
+
+						$("#state")
+								.change(
+										function() {
+
+											var stateId = $(this).val();
+
+											$
+													.ajax({
+														type : 'GET',
+														url : '/getCities/'
+																+ stateId,
+														success : function(
+																result) {
+
+															var s = '<option value=""> --SELECT--- </option>';
+															for (var i = 0; i < result.length; i++) {
+																s += '<option value="' + result[i].cityId + '">'
+																		+ result[i].name
+																		+ '</option>';
+															}
+
+															$('#city').html(s);
+
+														}
+													});
+
+										});
+
+					});
+</script>
+
+</head>
+<body style="background-color: red;">
+	<h2>Address Details</h2>
+	<form th:action="@{/address}" th:object="${add}" method="post">
+		<pre>
+	Contact No : <input type="text" th:field="*{contactNo}">
+	
+	Address    : <input type="text" th:field="*{address}">
+	
+	Landmark   : <input type="text" th:field="*{landmark}">
+	
+	Country    : <select th:field="*{countryId}" id="country">
+                         <option value=""> --SELECT--- </option>
+                         <option th:each="cat : ${countries}"
+					th:value="${cat.countryId}" th:text="${cat.name}" />
+                  </select>   
+	
+	State      : <select th:field="*{stateId}" id="state">
+                         <option value=""> --SELECT--- </option>
+                  </select>
+	
+	City       : <select th:field="*{cityId}" id="city">
+                         <option value=""> --SELECT--- </option>
+                  </select>
+	
+	Pincode    : <input type="text" th:field="*{pincode}">
+	
+	     
+	
+	
+	    <button>SAVE</button>
+	
+	</pre>
+	</form>
+
+</body>
+</html>
