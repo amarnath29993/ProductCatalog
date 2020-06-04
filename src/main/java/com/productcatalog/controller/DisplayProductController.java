@@ -37,6 +37,8 @@ public class DisplayProductController {
 	@RequestMapping("/{sub}")
 	public String showProduct(@PathVariable("sub") String subcat,HttpServletRequest req ,ModelMap map) {
 		
+		System.out.println("SubCategory :- " +subcat);
+		
 		if(req.getUserPrincipal()!=null) {
 			map.addAttribute("user", userRepo.findByEmailId(req.getUserPrincipal().getName()).get());
 		}

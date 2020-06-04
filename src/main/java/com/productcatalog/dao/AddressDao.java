@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.productcatalog.model.Address;
 import com.productcatalog.model.City;
 import com.productcatalog.model.Country;
 import com.productcatalog.model.State;
+import com.productcatalog.repo.AddressRepo;
 import com.productcatalog.repo.CityRepo;
 import com.productcatalog.repo.CountryRepo;
 import com.productcatalog.repo.StateRepo;
@@ -22,6 +24,10 @@ public class AddressDao {
 	
 	@Autowired
 	CityRepo cityRepo;
+	
+	@Autowired
+	AddressRepo addressRepo;
+	
 public List<Country> getCountries(){
 		
 		return countryRepo.findAll();
@@ -44,6 +50,9 @@ public List<Country> getCountries(){
 		
 		countryRepo.save(null);
 	}
-
+	public List<Address> getAllAddress() {
+		
+		return addressRepo.findAll();
+	}
 	
 }

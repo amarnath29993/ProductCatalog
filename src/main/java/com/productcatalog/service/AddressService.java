@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.productcatalog.dao.AddressDao;
+import com.productcatalog.model.Address;
 import com.productcatalog.model.City;
 import com.productcatalog.model.Country;
 import com.productcatalog.model.State;
@@ -29,5 +30,8 @@ public class AddressService {
 		
 		return addressDao.getCitiesByStateId(countryId);
 	}
-
+	public List<Address> getAllAddress() {
+		 return addressDao.getAllAddress();
+			
+		}
 }

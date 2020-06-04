@@ -89,17 +89,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</li>
 						<li class="login">
 							<i class="lock"></i>
-							<a href="/login1">Login</a>|
-						</li>
+							<a href="/login1">Login</a>|						</li>
+							
+							<li>
+							 <a href="/cust">Sign Up</a>
+							</li>
 						<li>
-							<i class="cart"></i>
-							<a href="/carts">Shopping Cart</a>
+							<a href="/">Home</a>
 						</li>
-						<li class="last"><span th:text="${cartCount}"></li>
+					
 					</ul>
-					<div class="sign-up-right">
-						<a href="/cust">Sign Up</a>
-					</div>
 				</div>
 				
 				<div class="header-right" th:if="${user!=null}">
@@ -113,10 +112,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<a href="/logout">logout</a>|
 						</li>
 						<li>
-							<i class="cart"></i>
-							<a href="/carts">Shopping Cart</a>
+							<i class=""></i>
+							<a href="/">Home</a>
 						</li>
-						<li class="last"><span th:text="${cartCount}"></li>
+						
 					</ul>
 					
 				</div>
@@ -144,7 +143,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="wrap">
 		<div class="navigation-strip">
 			<h4>Categories<i class="arrow"></i></h4>
-			<div class="top-menu" th:each="cat:${categories}">
+			<div class="top-menu" th:each="cat:${cat}">
 				<!-- start header menu -->
 		<ul class="megamenu skyblue">
 			<li><a class="color1" href="#" th:text="${cat.cat}"></a>
@@ -152,10 +151,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="row">
 						<div class="col1">
 							<div class="h_nav" >
-								<h4>subcategories</h4>
+								<h4>Subcategories</h4>
 								<div th:each="subcat:${subCategories}">
 								<ul>
 									<li th:if='${cat.cat}==${subcat.cat}'><a th:href="@{/{subCat}(subCat=${subcat.subCategory})}" th:text='${subcat.subCategory}'></a></li>
+									
 									
 								</ul>	
 							</div>	
@@ -171,61 +171,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 		<div class="main">
     <div class="content">
-    	<div class="content_top">
-    		<div class="heading">
-    		<h3>Feature Products</h3>
-    		</div>
-    		<div class="sort">
-    		<p>Sort by:
-    			<select>
-    				<option>Lowest Price</option>
-    				<option>Highest Price</option>
-    				<option>Lowest Price</option>
-    				<option>Lowest Price</option>
-    				<option>Lowest Price</option>
-    				<option>In Stock</option>  				   				
-    			</select>
-    		</p>
-    		</div>
-    		<div class="show">
-    		<p>Show:
-    			<select>
-    				<option>4</option>
-    				<option>8</option>
-    				<option>12</option>
-    				<option>16</option>
-    				<option>20</option>
-    				<option>In Stock</option>  				   				
-    			</select>
-    		</p>
-    		</div>
-    		<div class="page-no">
-    			<p>Result Pages:<ul>
-    				<li><a href="#">1</a></li>
-    				<li class="active"><a href="#">2</a></li>
-    				<li><a href="#">3</a></li>
-    				<li>[<a href="#"> Next>>></a >]</li>
-    				</ul></p>
-    		</div>
-    		<div class="clearfix"></div>
-    	</div>
+    	
 	      <div class="section group">
 	      
-	      <div th:if="${pros.empty}">
+	      <div th:if="${carts.empty}">
 	      <p style="color:red;text-align: center;"> No Products found</p>
 	      </div>
 	      
-				<div class="grid_1_of_4 images_1_of_4" th:each="pro: ${pros}">
+				<div class="grid_1_of_4 images_1_of_4" th:each="pro: ${carts}">
 					 <a href="single.html"><img th:attr="src=@{${pro.strImage}}" alt="" /></a>
 					 <h2 th:text="${pro.productName}"></h2>
 					 <p th:text="${pro.specification}"></p>
 					 <p><span class="strike">$528.22</span><span class="price" th:text="${pro.price}"></span></p>
-					  <div class="button"><span><img src="images/cart.jpg" alt="" /><a th:href="@{/cart/{id}(id=${pro.productName})}" class="cart-button">Add to Cart</a></span> </div>
-				     <div class="button"><span><a th:href="@{/details/{id}(id=${pro.productId})}" class="details">Details</a></span></div>
+					  
+				     <div class="button"><span><a th:href="@{/cartremove/{id}(id=${pro.productName})}" class="details">Remove</a></span></div>
 				</div>
 				<div class="clearfix"></div>
 			</div>
+			<div align="right">
 			
+			
+			  <div th:if="${!carts.empty}">
+			  <button><a href="/proceed">Proceed to checkout</a></button>
+	      </div>
+	      
+			</div>
 			
 		</div>
 	</div>

@@ -12,41 +12,41 @@ import com.productcatalog.repo.ProductRepo;
 public class ProductDao {
 
 	@Autowired
-	ProductRepo productrepo;
+	ProductRepo productRepo;
 
 	public Product registerProduct(Product product) {
 
-		return productrepo.save(product);
+		return productRepo.save(product);
 
 	}
 
 	public List<Product> getAllProducts() {
 
-		return productrepo.findAll();
+		return productRepo.findAll();
 	}
 
 	public Product getProductById(Integer id) {
 
-		return productrepo.findById(id).get();
+		return productRepo.findById(id).get();
 	}
 
 	public void updateProduct(Product product) {
 
-		productrepo.save(product);
+		productRepo.save(product);
 	}
 
 	public void deleteProduct(Integer id) {
 
-		productrepo.deleteById(id);
+		productRepo.deleteById(id);
 	}
 
 	public List<Product> getProductBySubCat(String subCat) {
 		System.out.println(subCat);
 		
-		return productrepo.findBySubCategory(subCat);
+		return productRepo.findBySubCategory(subCat);
 	}
 	public Product getProductByName(String pro) {
-		return productrepo.findByProductName(pro);
+		return productRepo.findByProductName(pro);
 	}
 
 }
