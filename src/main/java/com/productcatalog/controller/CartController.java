@@ -103,7 +103,7 @@ public class CartController {
 	@RequestMapping("/proceed")
 	public String proceed(HttpServletRequest request, ModelMap map) {
 
-		System.out.println("hh    " + request.getUserPrincipal().getName());
+		System.out.println("hi   " + request.getUserPrincipal().getName());
 
 		List<Country> countries = addressService.getCountries();
 		map.addAttribute("countries", countries);
@@ -118,5 +118,33 @@ public class CartController {
 		map.addAttribute("ads", ads);
 
 		return "proceed";
+	}
+
+	@RequestMapping("/buy")
+
+	public String buyProduct() {
+		return "payment";
+
+	}
+
+	@RequestMapping("/purchase")
+
+	public String purchaseProduct(HttpServletRequest request, ModelMap map) {
+
+		List<Product> carts = new ArrayList<Product>();
+
+		List<String> pros = (List<String>) request.getSession().getAttribute("PROD");
+
+		for (String pro : pros) {
+			Product product = productService.getProductByName(pro);
+
+			carts.add(product);
+		}
+		System.out.println("carts products");
+		System.out.println(carts);
+		map.addAttribute("pros", carts);
+
+		return "/purchase";
+
 	}
 }

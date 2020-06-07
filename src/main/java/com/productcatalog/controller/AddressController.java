@@ -39,6 +39,8 @@ public class AddressController {
 	@RequestMapping("/address")
 	public String formAddress(HttpServletRequest req, ModelMap map) {
 		Principal userPrincipal=req.getUserPrincipal();
+		
+		if(req.getUserPrincipal()!=null)
 		System.out.println(userPrincipal.getName());
 		
 		Optional<Users> user=userRepo.findByEmailId(userPrincipal.getName());
